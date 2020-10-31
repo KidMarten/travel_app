@@ -1,0 +1,6 @@
+Flask
+gunicorn
+python-dotenv
+pymystem3
+pandas
+gensim

@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="cp1251">
+    <title>SmartTravel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+
+    <header id='main-header'>
+        <div class="container">
+            <h1>SmartTravel</h1>
+        </div>
+    </header>
+
+    <nav id='navbar'>
+        <div class="container">
+            <ul>
+                <li><a href="#">О сервисе</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!--Section that contains some slogan.-->
+    <section id="showcase">
+        <div class="container">
+            <h1>Найди свой отель</h1>
+        </div>
+    </section>
+
+    <!--Container to store greetings and input form-->
+    <div class="input-container">
+
+        <!--Section that contains greetings and service description-->
+        <section id="description">
+                <h1>Добро пожаловать!</h1>
+                <p>Сервис SmartTravel использует искуственный интеллект для поиска наиболее 
+                    подходящих гостиниц по запросу пользователя.
+                </p>
+        </section>
+
+        <!--Section that contains instructions and input form-->
+        <section id="query">
+            <h3>Введите описание гостиницы. Чем подробнее описание, тем лучше рекомендация.</h3>
+        </section>
+        
+        <section class="suggestion-header">
+            <h4>Пример запроса:</h4>
+        </section>
+
+        <section class="example-query">
+            <h4>Нужен отель, расположенный на берегу моря, с номерами с видом на море, чтобы можно было не только отдохнуть и поплавать, 
+                но и занятся активными видами спорта, поиграть в теннис, гольф и т.д. 
+                Также желательно, чтобы поблизости было много хороших недорогих ресторанов с местной кухней. Вечером должно быть тихо, никакой музыки.</h4>
+        </section>
+
+        <section id="example-query">
+            <form action="{{ url_for('search_hotels') }}" method="post">
+                <p>
+                <label>Описание</label>
+                    <input type="text", required="required", name="query">
+                </p>
+            </form>
+        </section>
+    </div>
+
+</body>
+</html>
