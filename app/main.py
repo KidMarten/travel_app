@@ -13,12 +13,12 @@ def main():
 def search_hotels():
 
     r = request.form['query']
-    result = query(r, ['name', 'url'], 5)
+    result = query(r, ['name', 'url', 'rating'], 10)
     names = result['name']
     urls = result['url']
-
+    rating = result['rating']
     return render_template(
         'result_page.html',
-        result=zip(names, urls),
+        result=zip(names, urls, rating),
         request=r
     )

@@ -23,8 +23,16 @@ normalizer = TextNormalizer()
 def query(query: str, columns: list, n_match: int):
     results_dict = defaultdict(list)
     ids = search_similar(query, n_match)
+    
+    if 'rating' not in columns:
+        columns.append('rating')
+
+    result_df = data.loc[ids, columns]
+    result_df = result_df.sort_values('rating', ascending=False)
+    
     for col in columns:
-        results_dict[col] = data.loc[ids, col].to_list()
+        results_dict[col] = result_df.loc[:, col].to_list()
+
     return results_dict
     
 

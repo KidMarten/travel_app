@@ -44,14 +44,11 @@
             <h1>Найденные гостиницы</h1>
             <div class="scrolling-container" style="overflow-y: scroll; height:400px;">
 
-                {% for name, url in result %}
+                {% for name, url, stars in result %}
                     <div class="hotel-element">
-                        <div class="hotel-name">
-                            {{ name }}
-                        </div>
-                        <div class="hotel-link">
-                            <a href="{{ url }}">{{ url }}</a>
-                        </div>
+                        <p>{{ name }}</p>
+                        <p>{{ stars }}</p>
+                        <p><a href="{{ url }}">{{ url }}</a></p>
                     </div>
                 {% endfor %}
             </div>
