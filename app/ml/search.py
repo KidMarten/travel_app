@@ -55,10 +55,6 @@ def query(query: str, n_match: int, model: str):
         columns={'name': 'Name', 'url': 'URL', 'rating': 'Rating'},
         inplace=True
     )
-    result_df = result_df.sort_values(
-        'Rating',
-        ascending=False
-    )
     result_df.reset_index(
         inplace=True,
         drop=True
