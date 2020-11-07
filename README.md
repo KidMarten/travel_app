@@ -1,1 +1,1 @@
-#### NLP-based app with web GUI for hotel recommendations
+#### NLP-based Streamlit app for hotel recommendations
