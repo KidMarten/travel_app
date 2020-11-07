@@ -28,18 +28,18 @@ model_name = st.selectbox(
     ('Tf-Idf', 'LDA')
 )
 
-# Result Table
+# Request Dataframe
 result = query(request, num_results, model_name)
 result['URL'] = result['URL'].apply(frontend.make_clickable_link)
-result = result.to_html(escape=False)
-st.write(
-    result,
-    unsafe_allow_html=True
-)
+
+# Result Table placeholder
+result_table = st.empty()
 
 # Map displaying search results
 st.write('')
 st.subheader('Map')
+geo_df = geo.get_coords(result['Name'])
+st.map(geo_df)
 
-
-
+result = result.to_html(escape=False)
+result_table.write(result, unsafe_allow_html=True)
