@@ -3,8 +3,13 @@ import pandas as pd
 import numpy as np
 from utils import conf, frontend, geo
 from ml.search import query
+from PIL import Image
 
 frontend.set_max_width(1300)
+
+wallpaper = Image.open('static_data/zanzibar.jpg')
+wallpaper = wallpaper.resize((1280, 500)) 
+st.image(wallpaper, use_column_width=True)
 
 st.title('SmartTravel')
 st.write('')
@@ -37,10 +42,10 @@ st.subheader('Search result')
 result_table = st.empty()
 
 # # Map displaying search results
-# st.write('')
-# st.subheader('Map')
-# geo_df = geo.get_coords(result['Name'])
-# st.map(geo_df)
+st.write('')
+st.subheader('Map')
+geo_df = geo.get_coords(result['Name'])
+st.map(geo_df)
 
 result = result.to_html(escape=False)
 result_table.write(result, unsafe_allow_html=True)
