@@ -15,14 +15,14 @@ request = st.text_input(
     value=conf.Config.example_query
 )
 st.write('')
-st.write('User request')
+st.subheader('User request')
 st.write(request)
 
 # Filter on number of search results
 num_results = st.sidebar.slider("Number of search results", min_value=3, max_value=20, value=10)
  
 # Decision box of recommendation model 
-model_name = st.selectbox(
+model_name = st.sidebar.selectbox(
     'Chose the search algorithm',
     ('Tf-Idf', 'LDA', 'Doc2Vec')
 )
@@ -33,6 +33,7 @@ result = query(request, num_results, model_name)
 result['URL'] = result['URL'].apply(frontend.make_clickable_link)
 
 # Result Table placeholder
+st.subheader('Search result')
 result_table = st.empty()
 
 # # Map displaying search results
