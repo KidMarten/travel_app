@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 from collections import defaultdict
 from ml.processing import TextNormalizer
 
-load_dotenv()
-data_path = os.environ.get('DATA_PATH')
-
+# load_dotenv()
+# data_path = os.environ.get('DATA_PATH')
+data_path = 'models'
 # Modelling artifacts
 dictionary = gensim.corpora.Dictionary.load(data_path + '/simple_model/dictionary.dict')
 tfidf = gensim.models.TfidfModel.load(data_path + '/simple_model/model.tfidf')
