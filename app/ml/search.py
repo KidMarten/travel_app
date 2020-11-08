@@ -17,11 +17,22 @@ lda = gensim.models.LdaModel.load(data_path + '/topic_model/model.lda')
 tfidf_index = gensim.similarities.MatrixSimilarity.load(data_path + '/simple_model/queries_index.index')
 lda_index = gensim.similarities.MatrixSimilarity.load(data_path + '/topic_model/full_description.index')
 
+doc2vec = gensim.models.doc2vec.Doc2Vec.load(data_path + '/doc2vec/model.doc2vec')
+
 # Dataset for reference
 data = pd.DataFrame(pickle.load(open(data_path + '/simple_model/2020_10_28_22_14_hotel_reviews.pickle', 'rb')))
 data.columns = ['name', 'url', 'description', 'amenities', 'reviews', 'rating']
 
 normalizer = TextNormalizer()
+
+
+
+def sort_ids(sims, n_match: int):
+    sorted_ids = []
+    similarities = sorted(enumerate(sims), key=lambda item: -item[1])
+    for i, sim in similarities[:n_match]:
+        sorted_ids.append(i)
+    return sorted_ids
 
 
 def search_similar(query: str, n_match: int, model:str):
@@ -32,16 +43,17 @@ def search_similar(query: str, n_match: int, model:str):
     if model == 'LDA':
         lda_query = lda[bow_query]
         sims = lda_index[lda_query]
+        sorted_ids = sort_ids(sims, n_match)
 
     elif model == 'Tf-Idf':
         tfidf_query = tfidf[bow_query]
         sims = tfidf_index[tfidf_query]
-
-    sorted_ids = []
-    similarities = sorted(enumerate(sims), key=lambda item: -item[1])
+        sorted_ids = sort_ids(sims, n_match)
     
-    for i, sim in similarities[:n_match]:
-        sorted_ids.append(i)
+    elif model == 'Doc2Vec':
+        vec = doc2vec.infer_vector(clean_query)
+        sims = doc2vec.docvecs.most_similar([vec], topn=n_match)
+        sorted_ids = [idx for (idx, sim) in sims]
 
     return sorted_ids
 

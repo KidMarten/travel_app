@@ -24,8 +24,9 @@ num_results = st.sidebar.slider("Number of search results", min_value=3, max_val
 # Decision box of recommendation model 
 model_name = st.selectbox(
     'Chose the search algorithm',
-    ('Tf-Idf', 'LDA')
+    ('Tf-Idf', 'LDA', 'Doc2Vec')
 )
+
 
 # Request Dataframe
 result = query(request, num_results, model_name)
