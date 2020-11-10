@@ -5,12 +5,14 @@ from utils import conf, frontend, geo
 from ml.search import query
 from PIL import Image
 
-frontend.set_max_width(1300)
+frontend.set_max_width(1200)
 
+# Wallpaper at the top of the page
 wallpaper = Image.open('static_data/zanzibar.jpg')
 wallpaper = wallpaper.resize((1280, 500)) 
 st.image(wallpaper, use_column_width=True)
 
+# App title
 st.title('SmartTravel')
 st.write('')
 
@@ -32,7 +34,6 @@ model_name = st.sidebar.selectbox(
     ('Tf-Idf', 'LDA', 'Doc2Vec')
 )
 
-
 # Request Dataframe
 result = query(request, num_results, model_name)
 result['URL'] = result['URL'].apply(frontend.make_clickable_link)
@@ -41,7 +42,7 @@ result['URL'] = result['URL'].apply(frontend.make_clickable_link)
 st.subheader('Search result')
 result_table = st.empty()
 
-# # Map displaying search results
+# Map displaying search results
 st.write('')
 st.subheader('Map')
 geo_df = geo.get_coords(result['Name'])

@@ -3,3 +3,4 @@ pymystem3
 pandas
 gensim
 streamlit
+googlemaps
