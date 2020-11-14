@@ -43,10 +43,13 @@ st.subheader('Search result')
 result_table = st.empty()
 
 # Map displaying search results
-st.write('')
-st.subheader('Map')
-geo_df = geo.get_coords(result['Name'])
-st.map(geo_df)
+display_map = st.sidebar.radio('Display Map', ('Yes', 'No'), index=1)
+if display_map == 'Yes':
+    st.write('')
+    st.subheader('Map')
+    geo_df = geo.get_coords(result['Name'])
+    st.map(geo_df)
 
+# Fill the result table placeholder
 result = result.to_html(escape=False)
 result_table.write(result, unsafe_allow_html=True)
