@@ -1,1 +1,1 @@
-#### NLP-based Streamlit app for hotel recommendations
+#### NLP-based Streamlit app for hotel recommendations [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/kidmarten/travel_app/app/travel_app.py)
